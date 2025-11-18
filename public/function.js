@@ -15,8 +15,7 @@ form.addEventListener('submit', async (event) => {
 
   if (!data.full_name || !data.email || !data.phone_number || !data.preferred_location || !data.interest) {
     popupMessage.textContent = "Please fill out all fields.";
-    popup.classList.remove('success');
-    popup.classList.add('error');
+    popup.className = "error";
     popup.classList.remove('hidden');
     return;
   }
@@ -31,19 +30,16 @@ form.addEventListener('submit', async (event) => {
     const result = await response.json();
 
     if (response.ok) {
-      popupMessage.textContent = `Thank you, ${data.full_name}! Your application was received. We’ll contact you soon.`;
-      popup.classList.remove('error');
-      popup.classList.add('success');
+      popupMessage.textContent = `Thank you, ${data.full_name}! Your application was received.`;
+      popup.className = "success";
     } else {
       popupMessage.textContent = result.message || "There was a problem submitting your application.";
-      popup.classList.remove('success');
-      popup.classList.add('error');
+      popup.className = "error";
     }
   } catch (err) {
     console.error(err);
     popupMessage.textContent = "Something went wrong. Please try again later.";
-    popup.classList.remove('success');
-    popup.classList.add('error');
+    popup.className = "error";
   }
 
   popup.classList.remove('hidden');
